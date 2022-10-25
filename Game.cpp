@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Game.h"
+#include "bezier.h"
 
 //Basic game functions
 #pragma region gameFunctions											
@@ -11,7 +12,10 @@ void Start()
 void Draw()
 {
 	ClearBackground();
-
+	Bezier urMom{};
+	urMom = CalculateBezier(Point2f{ 0,0 }, Point2f{ 500,0 }, Point2f{ 150,300 }, Point2f{ 350,300 });
+	SetColor(1, 0, 0, 1);
+	DrawBezier(urMom,1);
 	// Put your own draw statements here
 
 }
