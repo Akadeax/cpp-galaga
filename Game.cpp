@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Game.h"
 #include "bezier.h"
+#include <iostream>
 
 //Basic game functions
 #pragma region gameFunctions											
@@ -12,17 +13,32 @@ void Start()
 
 void Draw()
 {
+	const int SQUARESIZE{ 50 };
 	ClearBackground();
 	Bezier urMom{};
-	urMom = CalculateBezier(Point2f{ 0,0 }, Point2f{ 500,0 }, Point2f{ 150,300 }, Point2f{ 350,300 });
 	SetColor(1, 0, 0, 1);
-	DrawBezier(urMom,1);
-	// Put your own draw statements here
+	urMom = CalculateBezier(Point2f{ 500,500 }, Point2f{ 50,76 },
+							Point2f{ 900,300 }, Point2f{ -200,4 });
+	SetColor(1, 0, 0, 1);
+	DrawBezier(urMom, 1);
+
+	Point2f smootheBitches = Lerp(urMom.curvePoints[int(g_Offset)], urMom.curvePoints[int(g_Offset) + 1], g_Offset - int(g_Offset));
+	smootheBitches.x -= (SQUARESIZE / 2);
+	smootheBitches.y -= (SQUARESIZE / 2);
+	FillRect(smootheBitches,SQUARESIZE, SQUARESIZE);
+	
+	
 
 }
 
 void Update(float deltaTime)
 {
+	std::cout << (1 / deltaTime) << std::endl;
+	g_Offset = (g_Offset + g_Speed * deltaTime);
+	if (g_Offset >= BEZIER_STEPS_AMOUNT-1)
+	{
+		g_Offset = 0.f;
+	}
 	// process input, do physics 
 
 	// e.g. Check keyboard state

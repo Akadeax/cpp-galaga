@@ -3,9 +3,6 @@
 #include "utils.h"
 #include "iostream"
 
-
-
-
 Bezier CalculateBezier(Point2f pointA, Point2f pointD, Point2f pointB, Point2f pointC)
 {
 	std::vector<Point2f> calculatedBezier = std::vector<Point2f>(BEZIER_STEPS_AMOUNT);
@@ -20,20 +17,14 @@ Bezier CalculateBezier(Point2f pointA, Point2f pointD, Point2f pointB, Point2f p
 	{
 		float multiplier{ (1.f/BEZIER_STEPS_AMOUNT)*i };
 		//the lerps for the first 3 lines
-		AB_Lerp.x = Lerp(pointA.x, pointB.x, multiplier);
-		AB_Lerp.y = Lerp(pointA.y, pointB.y, multiplier);
-		BC_Lerp.x = Lerp(pointB.x, pointC.x, multiplier);
-		BC_Lerp.y = Lerp(pointB.y, pointC.y, multiplier);
-		CD_Lerp.x = Lerp(pointC.x, pointD.x, multiplier);
-		CD_Lerp.y = Lerp(pointC.y, pointD.y, multiplier);
+		AB_Lerp = Lerp(pointA, pointB, multiplier);
+		BC_Lerp = Lerp(pointB, pointC, multiplier);
+		CD_Lerp = Lerp(pointC, pointD, multiplier);
 		//the lerps for the 2 created lines
-		AB_BC_Lerp.x = Lerp(AB_Lerp.x, BC_Lerp.x, multiplier);
-		AB_BC_Lerp.y = Lerp(AB_Lerp.y, BC_Lerp.y, multiplier);
-		BC_CD_Lerp.x = Lerp(BC_Lerp.x, CD_Lerp.x, multiplier);
-		BC_CD_Lerp.y = Lerp(BC_Lerp.y, CD_Lerp.y, multiplier);
+		AB_BC_Lerp = Lerp(AB_Lerp, BC_Lerp, multiplier);
+		BC_CD_Lerp = Lerp(BC_Lerp, CD_Lerp, multiplier);
 		//the point of the curve
-		curvePoint.x = Lerp(AB_BC_Lerp.x, BC_CD_Lerp.x, multiplier);
-		curvePoint.y = Lerp(AB_BC_Lerp.y, BC_CD_Lerp.y, multiplier);
+		curvePoint = Lerp(AB_BC_Lerp, BC_CD_Lerp, multiplier);
 		calculatedBezier[i] = curvePoint;
 	}
 	Bezier solution{};
@@ -43,9 +34,16 @@ Bezier CalculateBezier(Point2f pointA, Point2f pointD, Point2f pointB, Point2f p
 
 float Lerp(float a, float b, float multiplier)
 {
-
 	return (a + (b - a) * multiplier);
 }
+
+Point2f Lerp(Point2f a, Point2f b, float multiplier)
+{
+	float x = Lerp(a.x, b.x, multiplier);
+	float y = Lerp(a.y, b.y, multiplier);
+	return Point2f{ x,y };
+}
+
 
 void DrawBezier(Bezier bezier,float lineWidth )
 {
@@ -53,4 +51,9 @@ void DrawBezier(Bezier bezier,float lineWidth )
 	{
 		utils::DrawLine(bezier.curvePoints[i], bezier.curvePoints[i + 1], lineWidth);
 	}
+}
+
+void FillBezier(Bezier bezier)
+{
+	utils::FillPolygon(bezier.curvePoints);
 }

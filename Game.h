@@ -5,15 +5,16 @@ using namespace utils;
 std::string g_WindowTitle{ "Project name - Name, firstname - 1DAExx" };
 
 // Change the window dimensions here
-float g_WindowWidth{ 500 };
-float g_WindowHeight{ 300 };
+float g_WindowWidth{ 1080 };
+float g_WindowHeight{ 1080 };
 #pragma endregion gameInformation
 
 
 
 #pragma region ownDeclarations
 // Declare your own global variables here
-
+float g_Offset{};
+float g_Speed{ 10 };
 // Declare your own functions here
 
 #pragma endregion ownDeclarations
