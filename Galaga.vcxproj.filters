@@ -33,6 +33,8 @@
     <ClCompile Include="utils.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
     <ClCompile Include="bezier.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -53,6 +55,7 @@
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
     <ClInclude Include="bezier.h">
       <Filter>Framework</Filter>
     </ClInclude>

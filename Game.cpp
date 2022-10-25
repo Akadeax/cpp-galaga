@@ -7,6 +7,7 @@
 void Start()
 {
 	// initialize game resources here
+	std::vector<Point2f> array = std::vector<Point2f>(101);
 }
 
 void Draw()
@@ -20,7 +21,7 @@ void Draw()
 
 }
 
-void Update(float elapsedSec)
+void Update(float deltaTime)
 {
 	// process input, do physics 
 
