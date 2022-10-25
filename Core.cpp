@@ -101,7 +101,7 @@ void Initialize()
 }
 
 extern void Start();
-extern void Update(float elapsedSec);
+extern void Update(float deltaTime);
 extern void Draw();
 extern void End();
 

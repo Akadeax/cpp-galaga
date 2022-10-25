@@ -21,7 +21,7 @@ float g_WindowHeight{ 300 };
 #pragma region gameFunctions											
 void Start();
 void Draw();
-void Update(float elapsedSec);
+void Update(float deltaTime);
 void End();
 #pragma endregion gameFunctions
 
