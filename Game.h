@@ -13,11 +13,7 @@ float g_WindowHeight{ 1080 };
 
 #pragma region ownDeclarations
 // Declare your own global variables here
-enum class EnemyPathAnimationState
-{
-	path1, path2, path3, path4, path5, path6, path7
-};
-EnemyPathAnimationState g_EnemyFlightpath2 = EnemyPathAnimationState::path1;
+float g_BaseSpeed{100};
 float g_Offset{};
 float g_Speed{ 10 };
 // Declare your own functions here

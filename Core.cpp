@@ -102,7 +102,7 @@ void Initialize()
 
 extern void Start();
 extern void Update(float deltaTime);
-extern void Draw();
+extern void Draw(float deltaTime);
 extern void End();
 
 extern void OnKeyDownEvent(SDL_Keycode key);
@@ -179,7 +179,7 @@ void Run()
 			Update(elapsedSeconds);
 
 			// Draw in the back buffer
-			Draw();
+			Draw(elapsedSeconds);
 
 			// Update the window: swap back and front buffer
 			SDL_GL_SwapWindow(g_pWindow);
