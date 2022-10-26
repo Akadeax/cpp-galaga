@@ -3,7 +3,7 @@
 #include "utils.h"
 #include "iostream"
 
-Bezier CalculateBezier(Point2f pointA, Point2f pointD, Point2f pointB, Point2f pointC)
+Bezier CalculateBezier(Point2f pointA, Point2f pointB, Point2f pointC, Point2f pointD)
 {
 	std::vector<Point2f> calculatedBezier = std::vector<Point2f>(BEZIER_STEPS_AMOUNT);
 	Point2f AB_Lerp{};
