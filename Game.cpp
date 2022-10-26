@@ -36,41 +36,33 @@ void Draw()
 	flightPath2.xScaling = flightPath2.windowWidth / flightPath2.pathWidth;
 	flightPath2.yScaling = flightPath2.windowHeight / flightPath2.pathHeight;
 
-	flightPath2.path1 = CalculateBezier(Point2f{ 0*flightPath2.xScaling,1*flightPath2.yScaling }, Point2f{ 2*flightPath2.xScaling,1.5f*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,3*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,5*flightPath2.yScaling });
-	flightPath2.path2 = CalculateBezier(Point2f{ 6*flightPath2.xScaling,5*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,8*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,8*flightPath2.yScaling }, Point2f{ 5.25f*flightPath2.xScaling,8*flightPath2.yScaling });
-	flightPath2.path3 = CalculateBezier(Point2f{ 5.25f*flightPath2.xScaling,8*flightPath2.yScaling }, Point2f{ 4.5f*flightPath2.xScaling,8*flightPath2.yScaling }, Point2f{ 4.5f*flightPath2.xScaling,8*flightPath2.yScaling }, Point2f{ 4.5f*flightPath2.xScaling,6.5f*flightPath2.yScaling });
-	flightPath2.path4 = CalculateBezier(Point2f{ 4.5f*flightPath2.xScaling,6.5f*flightPath2.yScaling }, Point2f{ 4.5f*flightPath2.xScaling,5*flightPath2.yScaling }, Point2f{ 4.5f*flightPath2.xScaling,5*flightPath2.yScaling }, Point2f{ 5.25f*flightPath2.xScaling,5*flightPath2.yScaling });
-	flightPath2.path5 = CalculateBezier(Point2f{ 5.25f*flightPath2.xScaling,5*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,5*flightPath2.yScaling }, Point2f{ 7*flightPath2.xScaling,6*flightPath2.yScaling }, Point2f{ 7.5f*flightPath2.xScaling,8*flightPath2.yScaling });
-	DrawBezier(flightPath2.path1, 1);
-	DrawBezier(flightPath2.path2, 1);
-	DrawBezier(flightPath2.path3, 1);
-	DrawBezier(flightPath2.path4, 1);
-	DrawBezier(flightPath2.path5, 1);
+	flightPath2.paths.push_back(CalculateBezier(Point2f{ 0*flightPath2.xScaling,1*flightPath2.yScaling }, Point2f{ 2*flightPath2.xScaling,1.5f*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,3*flightPath2.yScaling }, Point2f{ 6*flightPath2.xScaling,5*flightPath2.yScaling }));
 
-	switch(g_EnemyFlightpath2)
+	flightPath2.paths.push_back(CalculateBezier(Point2f{ 6 * flightPath2.xScaling,5 * flightPath2.yScaling }, Point2f{ 6 * flightPath2.xScaling,8 * flightPath2.yScaling }, Point2f{ 6 * flightPath2.xScaling,8 * flightPath2.yScaling }, Point2f{ 5.25f * flightPath2.xScaling,8 * flightPath2.yScaling }));
+
+	flightPath2.paths.push_back(CalculateBezier(Point2f{ 5.25f * flightPath2.xScaling,8 * flightPath2.yScaling }, Point2f{ 4.5f * flightPath2.xScaling,8 * flightPath2.yScaling }, Point2f{ 4.5f * flightPath2.xScaling,8 * flightPath2.yScaling }, Point2f{ 4.5f * flightPath2.xScaling,6.5f * flightPath2.yScaling }));
+
+	flightPath2.paths.push_back(CalculateBezier(Point2f{ 4.5f * flightPath2.xScaling,6.5f * flightPath2.yScaling }, Point2f{ 4.5f * flightPath2.xScaling,5 * flightPath2.yScaling }, Point2f{ 4.5f * flightPath2.xScaling,5 * flightPath2.yScaling }, Point2f{ 5.25f * flightPath2.xScaling,5 * flightPath2.yScaling }));
+
+	flightPath2.paths.push_back(CalculateBezier(Point2f{ 5.25f * flightPath2.xScaling,5 * flightPath2.yScaling }, Point2f{ 6 * flightPath2.xScaling,5 * flightPath2.yScaling }, Point2f{ 7 * flightPath2.xScaling,6 * flightPath2.yScaling }, Point2f{ 7.5f * flightPath2.xScaling,8 * flightPath2.yScaling }));
+
+	for (int i{ 0 }; i < flightPath2.paths.size(); ++i)
 	{
-	case(EnemyPathAnimationState::path1):
-		smootheTransition = Lerp(flightPath2.path1.curvePoints[int(g_Offset)], flightPath2.path1.curvePoints[int(g_Offset) + 1], g_Offset - int(g_Offset));
-		break;
-	case(EnemyPathAnimationState::path2):
-		smootheTransition = Lerp(flightPath2.path2.curvePoints[int(g_Offset)], flightPath2.path2.curvePoints[int(g_Offset) + 1], g_Offset - int(g_Offset));
-		break;
-	case(EnemyPathAnimationState::path3):
-		smootheTransition = Lerp(flightPath2.path3.curvePoints[int(g_Offset)], flightPath2.path3.curvePoints[int(g_Offset) + 1], g_Offset - int(g_Offset));
-		break;
-	case(EnemyPathAnimationState::path4):
-		smootheTransition = Lerp(flightPath2.path4.curvePoints[int(g_Offset)], flightPath2.path4.curvePoints[int(g_Offset) + 1], g_Offset - int(g_Offset));
-		break;
-	case(EnemyPathAnimationState::path5):
-		smootheTransition = Lerp(flightPath2.path5.curvePoints[int(g_Offset)], flightPath2.path5.curvePoints[int(g_Offset) + 1], g_Offset - int(g_Offset));
-		break;
+		DrawBezier(flightPath2.paths[i], 1);
 	}
+
+	std::vector<Point2f> combinedPaths = std::vector<Point2f>();
+
+	for (int i{ 0 }; i < flightPath2.paths.size(); ++i)
+	{
+		const std::vector<Point2f>& current = flightPath2.paths[i].curvePoints;
+		combinedPaths.insert(combinedPaths.end(), current.begin(), current.end());
+	}
+	cout << std::to_string(combinedPaths.size()) << endl;
+
 	smootheTransition.x -= (SQUARESIZE / 2);
 	smootheTransition.y -= (SQUARESIZE / 2);
 	FillRect(smootheTransition,SQUARESIZE, SQUARESIZE);
-	
-	
-
 }
 
 void Update(float deltaTime)

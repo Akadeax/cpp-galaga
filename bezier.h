@@ -7,7 +7,8 @@ struct Bezier
 
 struct FlightPath
 {
-	Bezier path1{}, path2{}, path3{}, path4{}, path5{};
+	// Bezier path1{}, path2{}, path3{}, path4{}, path5{};
+	std::vector<Bezier> paths;
 	float pathWidth{}, pathHeight{}, windowWidth{}, windowHeight{}, xScaling{}, yScaling{};
 	int usedPaths{};
 };
