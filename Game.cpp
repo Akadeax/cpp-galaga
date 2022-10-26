@@ -52,17 +52,17 @@ void Draw(float deltaTime)
 	}
 	
 	if (g_Offset != combinedPaths.size()) {
-		float distanceBetweenPoints = (sqrtf(powf(combinedPaths[int(g_Offset + 1) ].x - combinedPaths[int(g_Offset) ].x,2) +
+		float distanceBetweenPoints = (sqrt(powf(combinedPaths[int(g_Offset + 1) ].x - combinedPaths[int(g_Offset) ].x,2) +
 											  powf(combinedPaths[int(g_Offset + 1) ].y - combinedPaths[int(g_Offset) ].y,2)));
 		g_Speed = g_BaseSpeed / distanceBetweenPoints;
 	}
-	cout << g_Speed << " current speed" << endl;
+	//cout << g_Speed << " current speed" << endl;
 	g_Offset = (g_Offset + (g_Speed*5) * deltaTime);
-	if (g_Offset >=  505)
+	if (g_Offset >=  504)
 	{
 		g_Offset = 0.f;
 	}
-	cout << int(g_Offset) << " current startpoint" << endl;
+	//cout << int(g_Offset) << " current startpoint" << endl;
 	smootheTransition = Lerp(combinedPaths[int(g_Offset)], combinedPaths[int(g_Offset+1)], (float(int(g_Offset*100)%100)/100));
 
 	smootheTransition.x -= (SQUARESIZE / 2);

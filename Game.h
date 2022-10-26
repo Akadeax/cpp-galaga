@@ -13,7 +13,7 @@ float g_WindowHeight{ 1080 };
 
 #pragma region ownDeclarations
 // Declare your own global variables here
-float g_BaseSpeed{100};
+float g_BaseSpeed{50};
 float g_Offset{};
 float g_Speed{ 10 };
 // Declare your own functions here
