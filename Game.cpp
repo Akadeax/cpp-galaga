@@ -13,19 +13,11 @@ void Start()
 	std::vector<Point2f> array = std::vector<Point2f>(101);
 }
 
-void Draw()
+void Draw(float deltaTime)
 {
 	const int SQUARESIZE{ 50 };
 	ClearBackground();
-
-	//Bezier urMom{};
-
-	//SetColor(1, 0, 0, 1);
-	//SetColor(1, 0, 0, 1);
-	//urMom = CalculateBezier(Point2f{ 500,500 }, Point2f{ 50,76 },
-	//						Point2f{ 900,300 }, Point2f{ -200,4 });
 	SetColor(1, 0, 0, 1);
-	/*DrawBezier(urMom, 1);*/
 	FlightPath flightPath2{};
 	Point2f smootheTransition{};
 	flightPath2.windowWidth = g_WindowWidth;
@@ -58,7 +50,19 @@ void Draw()
 		const std::vector<Point2f>& current = flightPath2.paths[i].curvePoints;
 		combinedPaths.insert(combinedPaths.end(), current.begin(), current.end());
 	}
-	cout << std::to_string(combinedPaths.size()) << endl;
+	
+	if (g_Offset != combinedPaths.size()) {
+		g_Speed = (sqrtf(combinedPaths[int(g_Offset + 1) ].x - combinedPaths[int(g_Offset) ].x) +
+				   sqrtf(combinedPaths[int(g_Offset + 1) ].y - combinedPaths[int(g_Offset) ].y));
+		
+	}
+	g_Offset = (g_Offset + (g_Speed*5) * deltaTime);
+	if (g_Offset >=  505)
+	{
+		g_Offset = 0.f;
+	}
+	cout << int(g_Offset) << " current startpoint" << endl;
+	smootheTransition = Lerp(combinedPaths[int(g_Offset)], combinedPaths[int(g_Offset+1)], (float(int(g_Offset*100)%100)/100));
 
 	smootheTransition.x -= (SQUARESIZE / 2);
 	smootheTransition.y -= (SQUARESIZE / 2);
@@ -68,29 +72,7 @@ void Draw()
 void Update(float deltaTime)
 {
 	//std::cout << (1 / deltaTime) << std::endl; // shows framerate
-	g_Offset = (g_Offset + g_Speed * deltaTime);
-	if (g_Offset >= BEZIER_STEPS_AMOUNT-1)
-	{
-		switch (g_EnemyFlightpath2)
-		{
-		case(EnemyPathAnimationState::path1):
-			g_EnemyFlightpath2 = EnemyPathAnimationState::path2;
-			break;
-		case(EnemyPathAnimationState::path2):
-			g_EnemyFlightpath2 = EnemyPathAnimationState::path3;
-			break;
-		case(EnemyPathAnimationState::path3):
-			g_EnemyFlightpath2 = EnemyPathAnimationState::path4;
-			break;
-		case(EnemyPathAnimationState::path4):
-			g_EnemyFlightpath2 = EnemyPathAnimationState::path5;
-			break;
-		case(EnemyPathAnimationState::path5):
-			g_EnemyFlightpath2 = EnemyPathAnimationState::path1;
-			break;
-		}
-		g_Offset = 0.f;
-	}
+	
 	// process input, do physics 
 
 	// e.g. Check keyboard state

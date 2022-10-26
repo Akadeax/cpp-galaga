@@ -6,12 +6,7 @@
 Bezier CalculateBezier(Point2f pointA, Point2f pointB, Point2f pointC, Point2f pointD)
 {
 	std::vector<Point2f> calculatedBezier = std::vector<Point2f>(BEZIER_STEPS_AMOUNT);
-	Point2f AB_Lerp{};
-	Point2f BC_Lerp{};
-	Point2f CD_Lerp{};
-	Point2f AB_BC_Lerp{};
-	Point2f BC_CD_Lerp{};
-	Point2f curvePoint{};
+	Point2f AB_Lerp{}, BC_Lerp{}, CD_Lerp{}, AB_BC_Lerp{}, BC_CD_Lerp{}, curvePoint{};
 
 	for (int i{}; i < BEZIER_STEPS_AMOUNT; i++)
 	{

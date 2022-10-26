@@ -13,7 +13,7 @@ struct FlightPath
 	int usedPaths{};
 };
 
-Bezier CalculateBezier(Point2f startPoint,Point2f endPoint,Point2f pullPoint1, Point2f pullPoint2);
+Bezier CalculateBezier(Point2f pointA,Point2f pointB,Point2f pointC, Point2f pointD);
 float Lerp(float a, float b, float multiplier);
 Point2f Lerp(Point2f a, Point2f b, float multiplier);
 void DrawBezier(Bezier bezier, float lineWidth);
